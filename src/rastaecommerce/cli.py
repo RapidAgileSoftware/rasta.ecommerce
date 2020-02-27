@@ -1,9 +1,9 @@
 import argparse
 import logging
-import os
 import sys
+from . import shell, utils
 
-__version__= "0.0.1"
+__version__ = "0.0.1"
 
 
 def add_default_args(parser):
@@ -11,7 +11,6 @@ def add_default_args(parser):
     Args:
         parser (argparse.ArgumentParser): CLI parser object
     """
-
     parser.add_argument(
         dest="project",
         help="Your projects name",
@@ -94,6 +93,8 @@ def main(args):
     print(opts)
 
 
+@shell.shell_command_error2exit_decorator
+@utils.exceptions2exit([RuntimeError])
 def run():
     """Entry point for console script"""
     main(sys.argv[1:])
