@@ -1,7 +1,7 @@
 import argparse
 import logging
 import sys
-from . import shell, utils
+from rastaecommerce import shell, utils
 
 __version__ = "0.0.1"
 
@@ -12,30 +12,31 @@ def add_default_args(parser):
         parser (argparse.ArgumentParser): CLI parser object
     """
     parser.add_argument(
+        dest="action",
+        help="what you want to do",
+        metavar="ACTION"
+    )
+    parser.add_argument(
+        "-p",
+        "--project",
         dest="project",
         help="Your projects name",
+        required=False,
         metavar="PROJECT")
     parser.add_argument(
+        "-d",
         "--domain",
-        "-u",
         dest="domain",
         required=False,
         help="Enter the domain url of your project"
     )
     parser.add_argument(
-        "-p",
-        "--package",
-        dest="package",
+        "-r",
+        "--repo",
+        dest="repo",
         required=False,
-        help="github package name (default: project name)",
-        metavar="NAME")
-    parser.add_argument(
-        "-d",
-        "--description",
-        dest="description",
-        required=False,
-        help="Describe your project",
-        metavar="TEXT")
+        help="github repo name (default: project name)",
+        metavar="REPO")
     parser.add_argument(
         '--version',
         action='version',
