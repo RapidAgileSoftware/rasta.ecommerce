@@ -20,6 +20,7 @@ def add_default_args(parser):
         "-p",
         "--project",
         dest="project",
+        default="My New Project",
         help="Your projects name",
         required=False,
         metavar="PROJECT")
@@ -27,6 +28,7 @@ def add_default_args(parser):
         "-d",
         "--domain",
         dest="domain",
+        default="wwww.example.com",
         required=False,
         help="Enter the domain url of your project"
     )
@@ -34,13 +36,20 @@ def add_default_args(parser):
         "-r",
         "--repo",
         dest="repo",
+        default="rasta.ecommerce.my_new_project",
         required=False,
-        help="github repo name (default: project name)",
+        help="github repo name (default: rasta.ecommerce.my_new_project)",
         metavar="REPO")
     parser.add_argument(
         '--version',
         action='version',
         version='Rasta Ecommerce {ver}'.format(ver=__version__))
+    parser.add_argument(
+        '--list_actions',
+        '--list-actions',
+        action='version',
+        version='Available actions: add, create, list-actions, version'
+    )
     parser.add_argument(
         "-v",
         "--verbose",
@@ -90,7 +99,13 @@ def main(args):
     """Main entry point for external applications
     """
     opts = parse_args(args)
-    opts = process_opts(opts)
+    action=opts['action']
+
+    if action=='create':
+        print('CREATES a new project with the following options')
+    elif action=='add':
+        print('Add one or more products with the following options')
+
     print(opts)
 
 
